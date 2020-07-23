@@ -21,6 +21,7 @@ def digger(path):
     global total_count_en
     for i in os.listdir(path):
         if os.path.isdir(os.path.join(path,i)):
+            print('\n',f"Файл: {i}.")
             digger(os.path.join(path,i))
         else:
             if i.split('.')[0] in ('RU', 'EN'):
@@ -31,13 +32,12 @@ def digger(path):
                 if i.split('.')[0] == 'EN':
                     temp = open_and_count(mod_path)
                     total_count_en += temp
-                print(f"Файл: {mod_path}. Содержит слов: {temp}")
+                print(f"    Файл: {i}. Содержит слов: {temp}")
             else:
                 continue
+    
 
 if __name__ == '__main__':
     digger(pathlib.Path(__file__).parent.absolute())
     print(f"Всего английских слов: {total_count_en}. Всего русских слов: {total_count_ru}.")
-    input("Для выхода нажмите Enter...")
 
-                
